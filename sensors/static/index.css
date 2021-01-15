@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#sensors {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-gap: 1rem;
+  justify-content: center;
+  align-content: center;
+}
+
+.sensor {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.heart-icon {
+  fill: red;
+}

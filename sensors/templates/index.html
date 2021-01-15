@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sensor Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/index.css' %}">
+        <script type="application/javascript" src="{% static '/index.js' %}"></script>
+    </head>
+    <body>
+        <div id="sensors" style="grid-template-columns: repeat({{ numCols }}, {{ colSize }}vmin)">
+            {% for sensor in sensors %}
+            <div id="sensor-{{ sensor.mac_address }}" class="sensor" style="grid-column: 1fr;">
+                <h2>{{ sensor.mac_address }}</h2>
+                <svg class="heart-icon" width="100px" height="100px">
+                    <use href="{% static '/heart.svg' %}#heart"></use>
+                </svg>
+                <p class="last-heartbeat">{{ sensor.last_heartbeat|date:"c" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
