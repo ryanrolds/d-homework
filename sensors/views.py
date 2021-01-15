@@ -18,22 +18,21 @@ from .models import Sensor
 def index(request):
     sensors = list(Sensor.objects.all().values())
 
-    # Displaying a grid of sensors requires calculating the number of 
-    # columns and to make a decent rectangle/square
+    # Get the number of columns and column width for a full-viewport CSS Grid
     numSensors = len(sensors)
     sqrtSensors = math.sqrt(numSensors)
     numCols = math.ceil(sqrtSensors)
+    
+    # Avoid divide by zero
     if numSensors == 0:
-        colSize =  0
-        colWidth = 0
+        colSize = 0
     else:
-        colSize = numCols * (numCols / numSensors)
-        colWidth = 100 / colSize
+        colSize = 100 / numCols
 
     template = loader.get_template("index.html")
     context = {
         "sensors": sensors,
-        "colWidth": colWidth,
+        "numCols": numCols,
         "colSize": colSize,
     }
     return HttpResponse(template.render(context, request))
